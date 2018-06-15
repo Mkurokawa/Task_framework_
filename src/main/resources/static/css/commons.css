@@ -42,7 +42,3 @@ input:read-only {
   content: "※";
   color: red;
 }
-
-.error {
-  color: red;
-}

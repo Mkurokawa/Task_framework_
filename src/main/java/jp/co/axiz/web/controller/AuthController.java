@@ -1,7 +1,5 @@
 package jp.co.axiz.web.controller;
 
-import java.util.Locale;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -38,10 +36,9 @@ public class AuthController {
 	public String login(@Validated @ModelAttribute("loginForm") LoginForm form, BindingResult bindingResult,
 			Model model) {
 
-		String errorMsg = messageSource.getMessage("login.error", null, Locale.getDefault());
 
 		if (bindingResult.hasErrors()) {
-			model.addAttribute("errmsg", errorMsg);
+			model.addAttribute("errmsg", "IDまたはPASSが間違っています");
 			return "login";
 		}
 
@@ -50,7 +47,7 @@ public class AuthController {
 
 		//検索結果 IDかPASSが空、間違えていたらloginへ 合っていたらnameを保存してmenuへ
 		if (admin == null) {
-			model.addAttribute("errmsg", errorMsg);
+			model.addAttribute("errmsg", "IDまたはPASSが間違っています");
 			return "login";
 		} else {
 			sessionInfo.setLoginUser(admin);

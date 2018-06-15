@@ -44,11 +44,14 @@ public class InsertController {
 			return "insert";
 		}
 
+		
 		UserInfo user = new UserInfo();
+		
 		user.setUserName(form.getName());
 		user.setTelephone(form.getTel());
 		user.setPassword(form.getPassword());
 
+		
 		sessionInfo.setNewUser(user);
 
 		return "insertConfirm";
@@ -59,6 +62,7 @@ public class InsertController {
 
 		UserInfo user = sessionInfo.getNewUser();
 
+		
 		form.setName(user.getUserName());
 		form.setTel(user.getTelephone());
 		form.setPassword(user.getPassword());

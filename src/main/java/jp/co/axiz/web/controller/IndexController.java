@@ -13,11 +13,13 @@ public class IndexController {
 	@Autowired
 	private SessionInfo sessionInfo;
 
+	
 	@RequestMapping("/index")
 	public String index(Model model) {
 		return "index";
 	}
 
+	
 	@RequestMapping("/menu")
 	public String menu(Model model) {
 		model.addAttribute("user", sessionInfo.getLoginUser());

@@ -52,9 +52,12 @@ public class DeleteController {
 			return "delete";
 		}
 
+		
+		
 		form.setName(user.getUserName());
 		form.setTel(user.getTelephone());
 
+		
 		return "deleteConfirm";
 	}
 

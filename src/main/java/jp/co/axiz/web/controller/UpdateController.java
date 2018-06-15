@@ -60,7 +60,7 @@ public class UpdateController {
 		form.setNewTel(user.getTelephone());
 		form.setNewPassword(user.getPassword());
 
-		return "updateInput";
+		return "updateInput"; //更新内容入力画面へ
 	}
 
 	@RequestMapping(value = "/updateConfirm", method = RequestMethod.POST)
@@ -70,7 +70,7 @@ public class UpdateController {
 		if (form.hasRequiredError()) {
 			String errorMsg = messageSource.getMessage("required.error", null, Locale.getDefault());
 			model.addAttribute("errmsg", errorMsg);
-			return "updateInput";
+			return "updateInput"; //更新内容入力画面へ
 		}
 
 		UserInfo beforeUser = sessionInfo.getPrevUser();
@@ -84,7 +84,7 @@ public class UpdateController {
 		if(afterUser.equals(beforeUser)) {
 			String errorMsg = messageSource.getMessage("required.change", null, Locale.getDefault());
 			model.addAttribute("errmsg", errorMsg);
-			return "updateInput";
+			return "updateInput";//更新内容入力画面へ
 		}
 
 		sessionInfo.setAfterUser(afterUser);
@@ -93,11 +93,11 @@ public class UpdateController {
 		form.setPrevTel(beforeUser.getTelephone());
 		form.setPrevPassword(beforeUser.getPassword());
 
-		if(beforeUser.getPassword().equals(afterUser.getPassword())) {
+		if(beforeUser.getPassword().equals(afterUser.getPassword())) {//passwordが変わっていたら
 			form.setConfirmNewPassword(afterUser.getPassword());
 		}
 
-		return "updateConfirm";
+		return "updateConfirm";//更新内容確認画面へ
 	}
 
 	@RequestMapping(value = "/updateInputBack")
@@ -110,7 +110,7 @@ public class UpdateController {
 		form.setNewTel(afterUser.getTelephone());
 		form.setNewPassword(afterUser.getPassword());
 
-		return "updateInput";
+		return "updateInput";//更新内容入力画面へ
 	}
 
 
@@ -120,7 +120,7 @@ public class UpdateController {
 
 		UserInfo afterUser = sessionInfo.getAfterUser();
 
-		if(!afterUser.getPassword().equals(form.getConfirmNewPassword())) {
+		if(!afterUser.getPassword().equals(form.getConfirmNewPassword())) {//passwordが一致しなければ
 			String errorMsg = messageSource.getMessage("password.not.match.error", null, Locale.getDefault());
 			model.addAttribute("errmsg", errorMsg);
 
@@ -131,7 +131,7 @@ public class UpdateController {
 			form.setPrevTel(beforeUser.getTelephone());
 			form.setPrevPassword(beforeUser.getPassword());
 
-			return "updateConfirm";
+			return "updateConfirm";//更新内容確認画面へ
 		}
 
 		userInfoService.update(afterUser);
@@ -141,19 +141,7 @@ public class UpdateController {
 
 		model.addAttribute("user", sessionInfo.getLoginUser());
 
-		return "updateResult";
+		return "updateResult";//更新結果画面へ
 	}
 
-//	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-//	public String deleteExecute(@Validated @ModelAttribute("deleteForm") DeleteForm form, BindingResult bindingResult,
-//			Model model) {
-//
-//		int id = form.getUserId();
-//
-//		userInfoService.delete(id);
-//
-//		model.addAttribute("user", adminService.getLoginUser());
-//
-//		return "deleteResult";
-//	}
 }

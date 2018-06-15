@@ -41,7 +41,10 @@ public class SelectController {
 			return "select";
 		}
 
+		
 		UserInfo condition = new UserInfo();
+		
+		
 		condition.setUserId(form.getUserId());
 		condition.setUserName(form.getName());
 		condition.setTelephone(form.getTel());
